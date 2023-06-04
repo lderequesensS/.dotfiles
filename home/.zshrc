@@ -22,10 +22,10 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#-- EXA
-alias ls="exa"
-alias ll="exa -l"
-alias la="exa -la"
+#-- EXA, is nice but I wanted the old format for some use cases
+# alias ls="exa"
+# alias ll="exa -l"
+# alias la="exa -la"
 
 #-- Other
 alias latamk="sudo localctl set-x11-keymap latam"
@@ -104,3 +104,11 @@ export PATH="$PATH:$HOME/Foundry"
 
 #-- Rust
 source "$HOME/.cargo/env"
+
+#-- Go
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+#-- For tmux colors
+export TERM='xterm-256color'
+export VISUAL='nvim'
