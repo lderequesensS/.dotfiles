@@ -54,3 +54,9 @@ vim.o.expandtab = true
 
 -- Thick cursor
 vim.o.guicursor = ""
+
+-- For undotree
+vim.o.swapfile = false
+vim.o.backup = false
+vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.o.undofile = true

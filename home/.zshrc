@@ -41,7 +41,7 @@ fi
 #-- Nvim
 alias nv="nvim"
 alias nvz="nvim ~/.zshrc"
-alias nvc="nvim ~/.config/nvim/"
+alias nvc="cd $HOME/.config/nvim/ && nvim"
 
 #-- Git
 alias grall='git restore .'
