@@ -22,11 +22,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#-- EXA, is nice but I wanted the old format for some use cases
-# alias ls="exa"
-# alias ll="exa -l"
-# alias la="exa -la"
-
 #-- Other
 alias latamk="sudo localctl set-x11-keymap latam"
 alias sn="shutdown now"
@@ -64,7 +59,6 @@ alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 #-- Fzf
 export repo_folder="$HOME/Repos"
-alias gfzf="git branch | fzf-tmux -d 15 | xargs git checkout"
 
 #-- This is heavily inspired by thePrimeagen tmux-sessionizer
 #-- So I tried to call this from inside nvim but couldn't find it so
