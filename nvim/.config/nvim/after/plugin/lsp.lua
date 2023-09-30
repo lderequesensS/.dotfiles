@@ -5,6 +5,7 @@ local luasnip = require('luasnip')
 lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
+  'gopls',
 })
 
 luasnip.config.setup {}

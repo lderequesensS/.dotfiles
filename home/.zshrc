@@ -44,8 +44,6 @@ alias gd='git diff .'
 alias gdc='git diff --staged .'
 alias gau='git add -u'
 alias gs='git status -s'
-alias gcom='git commit -m'
-alias gcmp='git checkout main && git pull' #TODO: Check if master exist and use that instead
 alias gpo='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias glp='git log --patch'
 alias glr='git log --raw'
@@ -53,9 +51,6 @@ alias glr='git log --raw'
 #-- Power Management (only my laptop)
 alias performance='sudo cpupower frequency-set -g performance -d 4.0G -u 4.3G'
 alias powersave='sudo cpupower frequency-set -g powersave -d 0.7G -u 1G'
-
-#-- DotFiles
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 #-- Fzf
 export repo_folder="$HOME/Repos"
@@ -90,8 +85,45 @@ fzfGit(){
     fi
 }
 
+GitMagic(){
+    separation="============"
+    echo "Starting auto fixup!"
+    echo $separation
+
+    maxCommits=0
+    counter=0
+    commitNumber=""
+    log_output=""
+
+    log_output=$(git --no-pager log --format=oneline -10)
+
+    while IFS= read -r line; do
+	echo "($counter) $line"
+	((counter+=1))
+    done <<< "$log_output"
+
+    echo $separation
+
+    if [ "$0" = "bash" ]; then
+	# Why std error?
+	read -p "Which commit do you want?: " commitNumber 
+    else
+	vared -p "Which commit do you want?: " -c commitNumber 
+    fi
+
+    selectedCommit=$(git --no-pager log --format=oneline --skip=$commitNumber -1 | awk '{print $1}')
+
+    if git commit --fixup=${selectedCommit} 2>&1 1>/dev/null; then
+	echo "Everything went well, don't forget to rebase --autosquash"
+    else
+	echo "Finished with issue, have you added files to git?"
+    fi
+}
+
 bindkey -s ^F "fzfChange\n"
 bindkey -s ^G "fzfGit\n"
+bindkey -s ^S "GitMagic\n"
+
 
 #-- Add foundryVTT to PATH
 export PATH="$PATH:$HOME/Foundry"
@@ -106,3 +138,9 @@ export PATH="$PATH:$GOPATH/bin"
 #-- For tmux colors
 export TERM='xterm-256color'
 export VISUAL='nvim'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/leo/Downloads/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/home/leo/Downloads/gcloud/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/leo/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/leo/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc'; fi

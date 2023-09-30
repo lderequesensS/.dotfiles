@@ -44,3 +44,15 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Change to executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Format
+function FormatFunction()
+  vim.lsp.buf.format({
+    async = true,
+    range = {
+      ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+      ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+    }
+  })
+end
+vim.keymap.set("n", "<leader>F", "<cmd>lua FormatFunction()<CR>")
