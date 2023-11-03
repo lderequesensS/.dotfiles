@@ -139,8 +139,15 @@ export PATH="$PATH:$GOPATH/bin"
 export TERM='xterm-256color'
 export VISUAL='nvim'
 
+#-- Why do you hate me dmenu?
+#-- This is only because dmenu can't always open flatpak apps
+alias ob='flatpak run md.obsidian.Obsidian&'
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/leo/Downloads/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/home/leo/Downloads/gcloud/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/leo/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/leo/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
