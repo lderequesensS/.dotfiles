@@ -155,6 +155,9 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- Undotree
+  {  'mbbill/undotree', opts = {}},
+
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -300,6 +303,9 @@ vim.keymap.set("n", "<C-k>", ":cprev<CR>")
 -- Change to executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- Undotree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -360,7 +366,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<C-f>', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -587,6 +593,21 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- [[ Harpoon ]]
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+-- Todo: check if there is a way to change this if you are using dvorak or querty
+-- The issue in querty is that j and k are being used in a few places, my understanding
+-- is that this is after everything but still don't work apparently
+vim.keymap.set("n", "<C-j>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-k>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-l>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-;>", function() ui.nav_file(4) end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
