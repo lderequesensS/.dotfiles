@@ -60,16 +60,21 @@ export repo_folder="$HOME/Repos"
 #-- IF in the future I want to start using this in that way I would need to
 #-- create is own file and add it to the PATH
 fzfChange(){
-    proyect_name=$(ls ${repo_folder} | fzf )
-    if [ -z ${TMUX} ]; then
-		tmux new -As $proyect_name -c "$repo_folder/$proyect_name"
-        exit 0
+    project_name=$(ls ${repo_folder} | fzf )
+
+    if [[ -z $project_name ]]; then
+	return 1
     fi
 
-    if ! tmux has-session -t=$proyect_name 2> /dev/null ; then
-		tmux new-session -ds $proyect_name -c "$repo_folder/$proyect_name"
-	fi
-    tmux switch-client -t $proyect_name
+    if [[ -z ${TMUX} ]]; then
+	tmux new -As $project_name -c "$repo_folder/$project_name"
+	return 0
+    fi
+
+    if ! tmux has-session -t=$project_name 2> /dev/null ; then
+	tmux new-session -ds $project_name -c "$repo_folder/$project_name"
+    fi
+    tmux switch-client -t $project_name
 }
 
 fzfGit(){
