@@ -60,77 +60,77 @@ export repo_folder="$HOME/Repos"
 #-- IF in the future I want to start using this in that way I would need to
 #-- create is own file and add it to the PATH
 fzfChange(){
-    project_name=$(ls ${repo_folder} | fzf )
+	project_name=$(ls ${repo_folder} | fzf )
 
-    if [[ -z $project_name ]]; then
+	if [[ -z $project_name ]]; then
 	return 1
-    fi
+	fi
 
-    if [[ -z ${TMUX} ]]; then
+	if [[ -z ${TMUX} ]]; then
 	tmux new -As $project_name -c "$repo_folder/$project_name"
 	return 0
-    fi
+	fi
 
-    if ! tmux has-session -t=$project_name 2> /dev/null ; then
+	if ! tmux has-session -t=$project_name 2> /dev/null ; then
 	tmux new-session -ds $project_name -c "$repo_folder/$project_name"
-    fi
-    tmux switch-client -t $project_name
+	fi
+	tmux switch-client -t $project_name
 }
 
 fzfGit(){
-    folder=$(pwd)
-    if [[ $folder == *"worktree"* ]]; then
-        branch=$(git worktree list | awk '{print $1}' | fzf)
+	folder=$(pwd)
+	if [[ $folder == *"worktree"* ]]; then
+		branch=$(git worktree list | awk '{print $1}' | fzf)
 	cd $branch
-    else
-        branch=$(git branch | fzf)
+	else
+		branch=$(git branch | fzf)
 	branch_clean=${branch/"*"}
 	branch_clean=$(echo "$branch_clean" | xargs )
 	git checkout $branch_clean 2>/dev/null
-    fi
+	fi
 }
 
 GitMagic(){
-    separation="============"
-    echo "Starting auto fixup!"
-    echo $separation
+	separation="============"
+	echo "Starting auto fixup!"
+	echo $separation
 
-    maxCommits=0
-    counter=0
-    commitNumber=""
-    log_output=""
+	maxCommits=0
+	counter=0
+	commitNumber=""
+	log_output=""
 
-    log_output=$(git --no-pager log --format=oneline -10)
+	log_output=$(git --no-pager log --format=oneline -10)
 
-    while IFS= read -r line; do
+	while IFS= read -r line; do
 	echo "($counter) $line"
 	((counter+=1))
-    done <<< "$log_output"
+	done <<< "$log_output"
 
-    echo $separation
+	echo $separation
 
-    if [ "$0" = "bash" ]; then
+	if [ "$0" = "bash" ]; then
 	# Why std error?
 	read -p "Which commit do you want?: " commitNumber 
-    else
+	else
 	vared -p "Which commit do you want?: " -c commitNumber 
-    fi
+	fi
 
-    selectedCommit=$(git --no-pager log --format=oneline --skip=$commitNumber -1 | awk '{print $1}')
+	selectedCommit=$(git --no-pager log --format=oneline --skip=$commitNumber -1 | awk '{print $1}')
 
-    if git commit --fixup=${selectedCommit} 2>&1 1>/dev/null; then
+	if git commit --fixup=${selectedCommit} 2>&1 1>/dev/null; then
 		echo "Everything went well, rebasing..."
-    else
+	else
 		echo "Finished with issue, have you added files to git?"
 		return 1
-    fi
+	fi
 
-    totalCommits=$(git rev-list --count HEAD) # Will this work for branches?
+	totalCommits=$(git rev-list --count HEAD) # Will this work for branches?
 	if (( "$totalCommits" >= 4 )); then
 		git rebase -i --autosquash HEAD~3
-    else
-    	git rebase -i --autosquash --root
-    fi
+	else
+		git rebase -i --autosquash --root
+	fi
 }
 
 bindkey -s ^F "fzfChange\n"
