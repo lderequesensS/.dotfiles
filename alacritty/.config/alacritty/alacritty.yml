@@ -1,6 +1,4 @@
 import:
-   # - ~/.dotfiles/alacritty/.config/alacritty/catppuccin.yaml
-   - ~/.dotfiles/alacritty/.config/alacritty/one_dark.yaml
 
 env:
   TERM: xterm-256color

@@ -52,6 +52,9 @@ alias glr='git log --raw'
 alias performance='sudo cpupower frequency-set -g performance -d 4.0G -u 4.3G'
 alias powersave='sudo cpupower frequency-set -g powersave -d 0.7G -u 1G'
 
+#-- Docker
+alias docker='sudo docker' # Just let me run the command!
+
 #-- Fzf
 export repo_folder="$HOME/Repos"
 
@@ -161,6 +164,3 @@ if [ -f '/home/leo/Downloads/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/h
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/leo/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/leo/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
