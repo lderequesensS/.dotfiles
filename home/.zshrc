@@ -52,6 +52,12 @@ alias glr='git log --raw'
 alias performance='sudo cpupower frequency-set -g performance -d 4.0G -u 4.3G'
 alias powersave='sudo cpupower frequency-set -g powersave -d 0.7G -u 1G'
 
+#-- 2nd Monitor
+xra(){
+	xrandr --output HDMI-A-0 --mode 1920x1080
+	xrandr --output HDMI-A-0 --left-of eDP
+}
+
 #-- Docker
 alias docker='sudo docker' # Just let me run the command!
 
