@@ -321,6 +321,10 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
+-- For merge conflicts, check if this make sence or they are backwards
+vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
+vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
