@@ -150,9 +150,6 @@ bindkey -s ^S "GitMagic\n"
 #-- Add foundryVTT to PATH
 export PATH="$PATH:$HOME/Foundry"
 
-#-- Rust
-source "$HOME/.cargo/env"
-
 #-- Go
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"

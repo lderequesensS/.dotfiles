@@ -13,3 +13,15 @@ I wanted the repo to be called `.dotfiles` but GitLab doesn't like . as the firs
   stow */
 ```
 
+
+---
+# The thing that always forget
+
+```
+Section "Device"
+    Identifier  "AMD Graphics"
+    Driver      "amdgpu"
+    Option      "TearFree" "true"
+EndSection
+```
+Here: `/etc/X11/xorg.conf.d/20-amd.conf`
