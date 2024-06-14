@@ -240,7 +240,7 @@ vim.o.smartcase = true
 -- vim.o.expandtab = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
-vim.o.noexpandtab = true
+-- vim.o.noexpandtab = true -- Removed version v0.10.0
 vim.o.list = true -- show tabs and other values of listchars list
 -- vim.o.softtabstop = 4
 
@@ -489,6 +489,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, { buffer = bufnr } )
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')

@@ -35,8 +35,6 @@ fi
 
 #-- Nvim
 alias nv="nvim"
-alias nvz="nvim ~/.zshrc"
-alias nvc="cd $HOME/.config/nvim/ && nvim"
 
 #-- Git
 alias grall='git restore .'
@@ -49,13 +47,40 @@ alias glp='git log --patch'
 alias glr='git log --raw'
 
 #-- Power Management (only my laptop)
-alias performance='sudo cpupower frequency-set -g performance -d 4.0G -u 4.3G'
-alias powersave='sudo cpupower frequency-set -g powersave -d 0.7G -u 1G'
+#-- Check sudo cpupower frequency-info
+power(){
+	PS3='Select a power mode: '
+	select opt in "performance" "normal" "save batery" "quit"; do
+		case $opt in
+			"performance")
+				sudo cpupower frequency-set -g performance -d 4.0G -u 4.37G
+				break
+				;;
+			"normal")
+				sudo cpupower frequency-set -g powersave -d 0.4G -u 4.37G
+				break
+				;;
+			"save batery")
+				sudo cpupower frequency-set -g powersave -d 0.7G -u 1G
+				break
+				;;
+			"quit")
+				break
+				;;
+			*)
+				echo "Invalid option $REPLY"
+		esac
+	done
+}
 
 #-- 2nd Monitor
 xra(){
 	xrandr --output HDMI-A-0 --mode 1920x1080
 	xrandr --output HDMI-A-0 --left-of eDP
+}
+xrax(){
+	#https://wiki.archlinux.org/title/Xrandr
+	xrandr --output HDMI-A-0 --off
 }
 
 #-- Docker
@@ -144,7 +169,7 @@ GitMagic(){
 
 bindkey -s ^F "fzfChange\n"
 bindkey -s ^G "fzfGit\n"
-bindkey -s ^S "GitMagic\n"
+bindkey -s ^T "GitMagic\n"
 
 
 #-- Add foundryVTT to PATH
