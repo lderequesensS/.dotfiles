@@ -74,14 +74,20 @@ power(){
 }
 
 #-- 2nd Monitor
+# https://wiki.archlinux.org/title/Xrandr
 xra(){
 	xrandr --output HDMI-A-0 --mode 1920x1080
 	xrandr --output HDMI-A-0 --left-of eDP
 }
+xra2(){
+	xrandr --output HDMI-A-0 --mode 1920x1080
+	xrandr --output HDMI-A-0 --right-of eDP
+}
 xrax(){
-	#https://wiki.archlinux.org/title/Xrandr
 	xrandr --output HDMI-A-0 --off
 }
+
+alias noblank='xset s off -dpms'
 
 #-- Docker
 alias docker='sudo docker' # Just let me run the command!
@@ -170,6 +176,11 @@ GitMagic(){
 bindkey -s ^F "fzfChange\n"
 bindkey -s ^G "fzfGit\n"
 bindkey -s ^T "GitMagic\n"
+
+#-- Python
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 
 #-- Add foundryVTT to PATH

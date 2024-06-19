@@ -1,0 +1,7 @@
+require("configs.lsp")
+require("configs.harpoon")
+require("configs.options")
+require("configs.telescope")
+require("configs.treesitter")
+require("configs.keymaps")
+require("configs.nvim-cmp")
