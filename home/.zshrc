@@ -76,15 +76,30 @@ power(){
 #-- 2nd Monitor
 # https://wiki.archlinux.org/title/Xrandr
 xra(){
-	xrandr --output HDMI-A-0 --mode 1920x1080
-	xrandr --output HDMI-A-0 --left-of eDP
-}
-xra2(){
-	xrandr --output HDMI-A-0 --mode 1920x1080
-	xrandr --output HDMI-A-0 --right-of eDP
-}
-xrax(){
-	xrandr --output HDMI-A-0 --off
+	PS3='Select output: '
+	select opt in "Only laptop" "Monitor on left" "Monitor on right" "quit"; do
+		case $opt in
+			"Only laptop")
+				xrandr --output HDMI-A-0 --off
+				break
+				;;
+			"Monitor on left")
+				xrandr --output HDMI-A-0 --mode 1920x1080
+				xrandr --output HDMI-A-0 --left-of eDP
+				break
+				;;
+			"Monitor on right")
+				xrandr --output HDMI-A-0 --mode 1920x1080
+				xrandr --output HDMI-A-0 --right-of eDP
+				break
+				;;
+			"quit")
+				break
+				;;
+			*)
+				echo "Invalid option $REPLY"
+		esac
+	done
 }
 
 alias noblank='xset s off -dpms'
