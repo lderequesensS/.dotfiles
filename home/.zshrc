@@ -77,18 +77,26 @@ power(){
 # https://wiki.archlinux.org/title/Xrandr
 xra(){
 	PS3='Select output: '
-	select opt in "Only laptop" "Monitor on left" "Monitor on right" "quit"; do
+	select opt in "Only laptop" "Only monitor" "Monitor on left" "Monitor on right" "quit"; do
 		case $opt in
 			"Only laptop")
 				xrandr --output HDMI-A-0 --off
+				xrandr --output eDP --mode 1920x1080
+				break
+				;;
+			"Only monitor")
+				xrandr --output eDP --off
+				xrandr --output HDMI-A-0 --mode 1920x1080
 				break
 				;;
 			"Monitor on left")
+				xrandr --output eDP --mode 1920x1080
 				xrandr --output HDMI-A-0 --mode 1920x1080
 				xrandr --output HDMI-A-0 --left-of eDP
 				break
 				;;
 			"Monitor on right")
+				xrandr --output eDP --mode 1920x1080
 				xrandr --output HDMI-A-0 --mode 1920x1080
 				xrandr --output HDMI-A-0 --right-of eDP
 				break
