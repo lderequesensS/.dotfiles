@@ -35,6 +35,7 @@ fi
 
 #-- Nvim
 alias nv="nvim"
+alias nv.="nvim ."
 
 #-- Git
 alias grall='git restore .'
@@ -111,6 +112,7 @@ xra(){
 }
 
 alias noblank='xset s off -dpms'
+alias tilde='xmodmap $HOME/.Xmodmap'
 
 #-- Docker
 alias docker='sudo docker' # Just let me run the command!
