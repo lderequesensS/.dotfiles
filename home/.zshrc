@@ -17,8 +17,8 @@ zstyle :compinstall filename '/home/leo/.zshrc'
 autoload -Uz compinit
 compinit
 
-#-- P10k installed manually
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+#-- P10k with oh-my-zsh
+source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -45,72 +45,6 @@ alias gs='git status -s'
 alias gpo='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias glp='git log --patch'
 alias glr='git log --raw'
-
-#-- Power Management (only my laptop)
-#-- Check sudo cpupower frequency-info
-power(){
-	PS3='Select a power mode: '
-	select opt in "performance" "normal" "save batery" "quit"; do
-		case $opt in
-			"performance")
-				sudo cpupower frequency-set -g performance -d 4.0G -u 4.37G
-				break
-				;;
-			"normal")
-				sudo cpupower frequency-set -g powersave -d 0.4G -u 4.37G
-				break
-				;;
-			"save batery")
-				sudo cpupower frequency-set -g powersave -d 0.7G -u 1G
-				break
-				;;
-			"quit")
-				break
-				;;
-			*)
-				echo "Invalid option $REPLY"
-		esac
-	done
-}
-
-#-- 2nd Monitor
-# https://wiki.archlinux.org/title/Xrandr
-xra(){
-	PS3='Select output: '
-	select opt in "Only laptop" "Only monitor" "Monitor on left" "Monitor on right" "quit"; do
-		case $opt in
-			"Only laptop")
-				xrandr --output HDMI-A-0 --off
-				xrandr --output eDP --mode 1920x1080
-				break
-				;;
-			"Only monitor")
-				xrandr --output eDP --off
-				xrandr --output HDMI-A-0 --mode 1920x1080
-				break
-				;;
-			"Monitor on left")
-				xrandr --output eDP --mode 1920x1080
-				xrandr --output HDMI-A-0 --mode 1920x1080
-				xrandr --output HDMI-A-0 --left-of eDP
-				break
-				;;
-			"Monitor on right")
-				xrandr --output eDP --mode 1920x1080
-				xrandr --output HDMI-A-0 --mode 1920x1080
-				xrandr --output HDMI-A-0 --right-of eDP
-				break
-				;;
-			"quit")
-				break
-				;;
-			*)
-				echo "Invalid option $REPLY"
-		esac
-	done
-}
-
-alias noblank='xset s off -dpms'
 
 #-- Docker
 alias docker='sudo docker' # Just let me run the command!
