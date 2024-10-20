@@ -5,13 +5,13 @@ TERM = "xterm-256color"
 size = 12.0
 
 [font.bold]
-family = "FiraCode"
+family = "MesloLGS NF"
 style = "Bold"
 
 [font.italic]
-family = "FiraCode"
+family = "MesloLGS NF"
 style = "Italic"
 
 [font.normal]
-family = "FiraCode"
+family = "MesloLGS NF"
 style = "Regular"
