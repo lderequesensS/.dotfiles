@@ -26,6 +26,11 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 alias latamk="sudo localctl set-x11-keymap latam"
 alias sn="shutdown now"
 alias zt="sudo systemctl start zerotier-one.service"
+alias open="xdg-open"
+alias vg="valgrind --leak-check=full --track-origins=yes"
+alias mhfu="sudo ufw disable && sudo openvpn --config $HOME/Trevor-1529553951__HVMAIN.ovpn && sudo ufw enable"
+alias noblack='xset s off -dpms'
+alias tilde='xmodmap $HOME/.Xmodmap'
 
 #-- Config Vars
 export EDITOR='nvim'
@@ -110,9 +115,6 @@ xra(){
 		esac
 	done
 }
-
-alias noblank='xset s off -dpms'
-alias tilde='xmodmap $HOME/.Xmodmap'
 
 #-- Docker
 alias docker='sudo docker' # Just let me run the command!
