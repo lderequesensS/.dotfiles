@@ -50,7 +50,7 @@ end
 --	define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  gopls = {},
+  gopls = { gopls = { buildFlags= {"-tags=unit"}} },
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
