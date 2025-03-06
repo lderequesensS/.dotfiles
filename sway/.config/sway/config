@@ -7,6 +7,9 @@
 # brightnessctl: laptop brightness
 # Screenshots: grim | slurp | swappy
 
+# Todo
+# Run local .desktop files
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -19,7 +22,10 @@ set $right l
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
+# Docs: man wmenu
 set $menu wmenu-run | xargs swaymsg exec --
+set $menu_flatpak bash $HOME/.config/sway/flatpak.sh | wmenu -i | xargs swaymsg exec -- flatpak run
+#set $menu_apps bash $HOME/.config/sway/local_apps.sh | wmenu -i | bash $HOME/.config/sway/run_local_apps.sh | xargs swaymsg exec --
 
 ### Output configuration
 # Set random wallpaper
@@ -79,6 +85,8 @@ input type:keyboard {
 
 	# Start your launcher
 	bindsym $mod+r exec $menu
+	bindsym $mod+g exec $menu_flatpak
+	# bindsym $mod+Shift+g exec $menu_apps
 
 	# Drag floating windows by holding down $mod and left mouse button.
 	# Resize them with right mouse button + $mod.
@@ -235,13 +243,20 @@ bindsym Ctrl+Print exec $HOME/.config/sway/grim.sh screen
 bindsym $mod+Print exec $HOME/.config/sway/grim.sh window
 bindsym Shift+Print exec $HOME/.config/sway/grim.sh selection
 
-
 # Reload waybar: https://github.com/Alexays/Waybar/issues/961#issuecomment-1817762772
 bindsym $mod+Ctrl+c exec killall -SIGUSR2 waybar
+
+# Other bindings
+bindsym $mod+m exec sh -c '$HOME/mullvad-browser/Browser/start-mullvad-browser  --detach || ([ ! -x $HOME/mullvad-browser/Browser/start-mullvad-browser ] && $HOME/mullvad-browser/start-mullvad-browser --detach)' dummy %k
 
 # Fix applications to workspaces
 assign [app_id=".*.firefox.*"] workspace number 1
 assign [app_id="Alacritty"] workspace number 2
+assign [app_id=".*.floorp.*"] workspace number 1
+
+# Fix some windows
+## sticky is for following you to other workspaces
+for_window [title="^Picture-in-Picture$"] floating enable, sticky enable
 
 exec blueman-applet
 exec nm-applet
