@@ -23,14 +23,10 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #-- Other
-alias latamk="sudo localctl set-x11-keymap latam"
 alias sn="shutdown now"
-alias zt="sudo systemctl start zerotier-one.service"
 alias open="xdg-open"
 alias vg="valgrind --leak-check=full --track-origins=yes"
 alias mhfu="sudo ufw disable && sudo openvpn --config $HOME/Trevor-1529553951__HVMAIN.ovpn && sudo ufw enable"
-alias noblack='xset s off -dpms'
-alias tilde='xmodmap $HOME/.Xmodmap'
 
 #-- Config Vars
 export EDITOR='nvim'
@@ -68,43 +64,6 @@ power(){
 				;;
 			"save batery")
 				sudo cpupower frequency-set -g powersave -d 0.7G -u 1G
-				break
-				;;
-			"quit")
-				break
-				;;
-			*)
-				echo "Invalid option $REPLY"
-		esac
-	done
-}
-
-#-- 2nd Monitor
-# https://wiki.archlinux.org/title/Xrandr
-xra(){
-	PS3='Select output: '
-	select opt in "Only laptop" "Only monitor" "Monitor on left" "Monitor on right" "quit"; do
-		case $opt in
-			"Only laptop")
-				xrandr --output HDMI-A-0 --off
-				xrandr --output eDP --mode 1920x1080
-				break
-				;;
-			"Only monitor")
-				xrandr --output eDP --off
-				xrandr --output HDMI-A-0 --mode 1920x1080
-				break
-				;;
-			"Monitor on left")
-				xrandr --output eDP --mode 1920x1080
-				xrandr --output HDMI-A-0 --mode 1920x1080
-				xrandr --output HDMI-A-0 --left-of eDP
-				break
-				;;
-			"Monitor on right")
-				xrandr --output eDP --mode 1920x1080
-				xrandr --output HDMI-A-0 --mode 1920x1080
-				xrandr --output HDMI-A-0 --right-of eDP
 				break
 				;;
 			"quit")
@@ -208,6 +167,7 @@ bindkey -s ^T "GitMagic\n"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+alias penv="python -m venv .venv && . .venv/bin/activate"
 
 
 #-- Add foundryVTT to PATH

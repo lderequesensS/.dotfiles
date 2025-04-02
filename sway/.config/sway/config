@@ -247,12 +247,15 @@ bindsym Shift+Print exec $HOME/.config/sway/grim.sh selection
 bindsym $mod+Ctrl+c exec killall -SIGUSR2 waybar
 
 # Other bindings
-bindsym $mod+m exec sh -c '$HOME/mullvad-browser/Browser/start-mullvad-browser  --detach || ([ ! -x $HOME/mullvad-browser/Browser/start-mullvad-browser ] && $HOME/mullvad-browser/start-mullvad-browser --detach)' dummy %k
+bindsym $mod+m exec swaymsg exec -- mullvad-browser
 
-# Fix applications to workspaces
+# Fix applications to workspaces: swaymsg -t get_tree
+# use app_id for wayland apps
 assign [app_id=".*.firefox.*"] workspace number 1
 assign [app_id="Alacritty"] workspace number 2
 assign [app_id=".*.floorp.*"] workspace number 1
+# Use class for x11 apps
+assign [class="obsidian"] workspace number 3
 
 # Fix some windows
 ## sticky is for following you to other workspaces
