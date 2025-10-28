@@ -9,3 +9,6 @@
 
 [diff]
 	colorMoved = default
+
+[alias]
+	amend = commit --amend

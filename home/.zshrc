@@ -75,6 +75,27 @@ power(){
 	done
 }
 
+monitor(){
+	PS3='Only for laptop screen: '
+	select opt in "on" "off" "quit"; do
+		case $opt in
+			"on")
+				swaymsg output "eDP-1" enable
+				break
+				;;
+			"off")
+				swaymsg output "eDP-1" disable
+				break
+				;;
+			"quit")
+				break
+				;;
+			*)
+				echo "Not a valid option: $REPLY"
+		esac
+	done
+}
+
 #-- Docker
 alias docker='sudo docker' # Just let me run the command!
 
@@ -162,6 +183,19 @@ GitMagic(){
 bindkey -s ^F "fzfChange\n"
 bindkey -s ^G "fzfGit\n"
 bindkey -s ^T "GitMagic\n"
+
+remove(){
+	device=$(find /dev/ -iname "sd*" | fzf)
+	if [[ -z $device ]]; then
+		return 1
+	fi
+
+	pre=$(udisksctl status)
+	sudo eject -v "$device"
+	sudo udisksctl power-off -b "$device"
+	post=$(udisksctl status)
+	echo "Removed: $(diff <(echo $pre) <(echo $post))"
+}
 
 #-- Python
 export PYENV_ROOT="$HOME/.pyenv"
