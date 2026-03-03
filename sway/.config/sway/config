@@ -6,6 +6,9 @@
 # playerctl: media buttons
 # brightnessctl: laptop brightness
 # Screenshots: grim | slurp | swappy
+# network-manager-applet: network applet
+# blueman: bluetooth applet
+# pavucontrol: for swaybar
 
 # Todo
 # Run local .desktop files
@@ -163,7 +166,7 @@ input type:keyboard {
 	bindsym $mod+v splitv
 
 	# Make the current focus fullscreen
-	bindsym $mod+f fullscreen
+	bindsym $mod+Shift+f fullscreen
 
 	# Toggle the current focus between tiling and floating mode
 	bindsym $mod+Shift+space floating toggle
@@ -250,15 +253,15 @@ bindsym $mod+Ctrl+c exec killall -SIGUSR2 waybar
 
 # Other bindings
 bindsym $mod+m exec swaymsg exec -- mullvad-browser
-bindsym $mod+F2 exec swaymsg exec -- pcmanfm
+bindsym $mod+f exec swaymsg exec -- pcmanfm
 bindsym $mod+F3 exec swaymsg exec -- $HOME/.local/bin/foundryvtt
 bindsym $mod+o exec swaymsg exec -- flatpak run md.obsidian.Obsidian
+bindsym $mod+z exec swaymsg exec -- flatpak run app.zen_browser.zen
 
 # Fix applications to workspaces: swaymsg -t get_tree
 # use app_id for wayland apps
 assign [app_id=".*.firefox.*"] workspace number 1
 assign [app_id="Alacritty"] workspace number 2
-assign [app_id=".*.floorp.*"] workspace number 1
 assign [app_id=".*zen.*"] workspace number 1
 # Use class for x11 apps
 assign [class="obsidian"] workspace number 3

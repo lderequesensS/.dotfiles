@@ -197,13 +197,6 @@ remove(){
 	echo "Removed: $(diff <(echo $pre) <(echo $post))"
 }
 
-#-- Python
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-alias penv="python -m venv .venv && . .venv/bin/activate"
-
-
 #-- Add foundryVTT to PATH
 export PATH="$PATH:$HOME/Foundry"
 
