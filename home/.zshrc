@@ -25,7 +25,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 #-- Other
 alias sn="shutdown now"
 alias open="xdg-open"
-alias vg="valgrind --leak-check=full --track-origins=yes"
 alias mhfu="sudo ufw disable && sudo openvpn --config $HOME/Trevor-1529553951__HVMAIN.ovpn && sudo ufw enable"
 
 #-- Config Vars
@@ -74,30 +73,6 @@ power(){
 		esac
 	done
 }
-
-monitor(){
-	PS3='Only for laptop screen: '
-	select opt in "on" "off" "quit"; do
-		case $opt in
-			"on")
-				swaymsg output "eDP-1" enable
-				break
-				;;
-			"off")
-				swaymsg output "eDP-1" disable
-				break
-				;;
-			"quit")
-				break
-				;;
-			*)
-				echo "Not a valid option: $REPLY"
-		esac
-	done
-}
-
-#-- Docker
-alias docker='sudo docker' # Just let me run the command!
 
 #-- Fzf
 export repo_folder="$HOME/Repos"

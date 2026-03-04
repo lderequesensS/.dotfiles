@@ -2,7 +2,7 @@
 
 #-- Software
 # Mako: notifications
-# pactl: Volume
+# wpctl: Volume media buttons
 # playerctl: media buttons
 # brightnessctl: laptop brightness
 # Screenshots: grim | slurp | swappy
@@ -232,11 +232,11 @@ bindsym Shift+F11 exec playerctl play-pause
 bindsym Shift+F10 exec playerctl previous
 bindsym Shift+F12 exec playerctl next
 
-# Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# Use wpctl to adjust volume in Pipewire.
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ .05+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ .05-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 # Keys for brightness
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
